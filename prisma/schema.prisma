@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model AdminUser {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String?
+  passwordHash String?
+  role         AdminRole @default(EDITOR)
+  isActive     Boolean   @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Order {
+  id                 String      @id @default(cuid())
+  reference          String      @unique
+  registrationNumber String
+  country            String
+  email              String
+  vehicleClass       VehicleClass
+  vehicleType        VehicleType?
+  vehicleMake        String?
+  vehicleColour      String?
+  crossings          Int         @default(1)
+  totalAmountPence   Int
+  currency           String      @default("GBP")
+  status             OrderStatus @default(PENDING)
+  stripeSessionId    String?     @unique
+  paidAt             DateTime?
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+}
+
+model PricingSetting {
+  id          String   @id @default(cuid())
+  code        String   @unique
+  label       String
+  amountPence Int
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ThemeSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  label       String
+  value       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SiteSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  label       String
+  value       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELLED
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  EDITOR
+}
+
+enum VehicleClass {
+  CLASS_A
+  CLASS_B
+  CLASS_C
+  CLASS_D
+}
+
+enum VehicleType {
+  CAR
+  VAN
+  MOTORHOME
+  BUS
+  HGV
+}
