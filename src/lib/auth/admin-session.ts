@@ -38,7 +38,7 @@ async function readSessionToken(token: string | undefined) {
   try {
     const { payload } = await jwtVerify(token, sessionSecret);
 
-    if (payload.email !== env.ADMIN_EMAIL) {
+    if (!payload.email) {
       return null;
     }
 
@@ -46,7 +46,7 @@ async function readSessionToken(token: string | undefined) {
 
     return {
       id: typeof payload.sub === "string" ? payload.sub : "env-admin",
-      email: typeof payload.email === "string" ? payload.email : env.ADMIN_EMAIL,
+      email: typeof payload.email === "string" ? payload.email : "unknown",
       role: role === "EDITOR" || role === "SUPER_ADMIN" ? role : "SUPER_ADMIN",
     } satisfies SessionIdentity;
   } catch {
@@ -55,11 +55,15 @@ async function readSessionToken(token: string | undefined) {
 }
 
 export async function verifyAdminCredentials(email: string, password: string) {
-  if (email !== env.ADMIN_EMAIL) {
+  const admin = await prisma.adminUser.findUnique({
+    where: { email },
+  });
+
+  if (!admin || !admin.passwordHash || !admin.isActive) {
     return false;
   }
 
-  return compare(password, env.ADMIN_PASSWORD_HASH);
+  return compare(password, admin.passwordHash);
 }
 
 export async function createAdminSession(identity: SessionIdentity) {
