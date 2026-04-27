@@ -4,13 +4,26 @@ import type { PricingItem } from "@/types";
 type PricingFormProps = {
   items: PricingItem[];
   saved?: boolean;
+  error?: string;
 };
 
 function formatPounds(amountPence: number) {
   return (amountPence / 100).toFixed(2);
 }
 
-export function PricingForm({ items, saved = false }: PricingFormProps) {
+const vehiclePricingFields = [
+  { code: "car", label: "Car price", helper: "Used when the selected vehicle type is car." },
+  { code: "lorry", label: "Lorry price", helper: "Used when the selected vehicle type is lorry." },
+  { code: "bus", label: "Bus price", helper: "Used when the selected vehicle type is bus." },
+] as const;
+
+export function PricingForm({
+  items,
+  saved = false,
+  error,
+}: PricingFormProps) {
+  const itemMap = new Map(items.map((item) => [item.code, item]));
+
   return (
     <form action={updatePricingAction} className="space-y-6">
       {saved ? (
@@ -19,40 +32,66 @@ export function PricingForm({ items, saved = false }: PricingFormProps) {
         </div>
       ) : null}
 
-      <div className="grid gap-4">
-        {items.map((item) => (
-          <div
-            key={item.code}
-            className="rounded-2xl border border-slate-200 bg-white p-5"
-          >
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="text-sm text-slate-500">Current price</p>
-                <h3 className="mt-1 text-lg font-semibold text-slate-950">
-                  {item.label}
-                </h3>
-                <p className="mt-1 text-sm text-slate-600">
-                  {new Intl.NumberFormat("en-GB", {
-                    style: "currency",
-                    currency: "GBP",
-                  }).format(item.amountPence / 100)}
-                </p>
-              </div>
-              <label className="block text-sm font-medium text-slate-800 sm:w-52">
-                Update price (GBP)
-                <input
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  name={`${item.code}_amountPence`}
-                  defaultValue={formatPounds(item.amountPence)}
-                  className="mt-2 h-11 w-full rounded-xl border border-slate-300 px-4"
-                />
+      {error ? (
+        <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {error}
+        </div>
+      ) : null}
+
+      <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
+        <div className="mb-5">
+          <h3 className="text-lg font-semibold text-slate-950">
+            Vehicle-type pricing
+          </h3>
+          <p className="mt-1 text-sm text-slate-600">
+            Prices are stored in Neon through Prisma and used by checkout on the
+            server.
+          </p>
+        </div>
+
+        <div className="grid gap-4">
+          {vehiclePricingFields.map((field) => {
+            const item = itemMap.get(field.code);
+
+            return (
+              <label
+                key={field.code}
+                className="block rounded-2xl border border-slate-200 bg-slate-50 p-4"
+              >
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-slate-950">
+                      {field.label}
+                    </p>
+                    <p className="mt-1 text-sm text-slate-600">{field.helper}</p>
+                    <p className="mt-2 text-sm text-slate-500">
+                      Current:{" "}
+                      {new Intl.NumberFormat("en-GB", {
+                        style: "currency",
+                        currency: "GBP",
+                      }).format((item?.amountPence ?? 0) / 100)}
+                    </p>
+                  </div>
+
+                  <div className="w-full sm:max-w-[220px]">
+                    <span className="text-sm font-medium text-slate-800">
+                      GBP amount
+                    </span>
+                    <input
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      inputMode="decimal"
+                      name={field.code}
+                      defaultValue={formatPounds(item?.amountPence ?? 0)}
+                      className="mt-2 h-11 w-full rounded-xl border border-slate-300 bg-white px-4"
+                    />
+                  </div>
+                </div>
               </label>
-              <input type="hidden" name={`${item.code}_label`} value={item.label} />
-            </div>
-          </div>
-        ))}
+            );
+          })}
+        </div>
       </div>
 
       <button

@@ -6,6 +6,10 @@ export type PricingItem = {
   isActive: boolean;
 };
 
+export type VehiclePricingCode = "car" | "lorry" | "bus";
+
+export type VehiclePricingValues = Record<VehiclePricingCode, number>;
+
 export type SiteSettingItem = {
   id: string;
   key: string;

@@ -3,10 +3,9 @@ import type { HomepageContent, PricingItem, ThemeConfig } from "@/types";
 export const defaultPricingSettings: Array<
   Omit<PricingItem, "id">
 > = [
-  { code: "class_a", label: "Class A", amountPence: 250, isActive: true },
-  { code: "class_b", label: "Class B", amountPence: 300, isActive: true },
-  { code: "class_c", label: "Class C", amountPence: 350, isActive: true },
-  { code: "class_d", label: "Class D", amountPence: 600, isActive: true },
+  { code: "car", label: "Car", amountPence: 250, isActive: true },
+  { code: "lorry", label: "Lorry", amountPence: 600, isActive: true },
+  { code: "bus", label: "Bus", amountPence: 450, isActive: true },
 ];
 
 export const defaultThemeSettings: ThemeConfig = {

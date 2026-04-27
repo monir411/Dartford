@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import type { VehicleClass } from "@/types";
+import { useState, useEffect } from "react";
+import type { VehiclePricingValues } from "@/types";
 
 const classOptions = [
   { value: "CLASS_A", label: "Class A" },
@@ -12,10 +12,8 @@ const classOptions = [
 
 const vehicleTypeOptions = [
   { value: "CAR", label: "Car" },
-  { value: "VAN", label: "Van" },
-  { value: "MOTORHOME", label: "Motorhome" },
+  { value: "HGV", label: "Lorry" },
   { value: "BUS", label: "Bus" },
-  { value: "HGV", label: "HGV" },
 ] as const;
 
 function formatCurrency(amountPence: number) {
@@ -25,32 +23,64 @@ function formatCurrency(amountPence: number) {
   }).format(amountPence / 100);
 }
 
-type PaymentFormProps = {
-  pricing: Record<VehicleClass, number>;
+export type VehiclePrefill = {
+  registrationNumber?: string;
+  make?: string;
+  colour?: string;
+  fuelType?: string;
+  yearOfManufacture?: string;
+  motStatus?: string;
+  taxStatus?: string;
 };
 
-export function PaymentForm({ pricing }: PaymentFormProps) {
+type PaymentFormProps = {
+  pricing: VehiclePricingValues;
+  prefill?: VehiclePrefill;
+};
+
+export function PaymentForm({ pricing, prefill }: PaymentFormProps) {
   const [formData, setFormData] = useState({
     class: "CLASS_A",
     crossings: "1",
     country: "United Kingdom",
-    registrationNumber: "",
-    confirmRegistration: "",
+    registrationNumber: prefill?.registrationNumber ?? "",
+    confirmRegistration: prefill?.registrationNumber ?? "",
     email: "",
-    make: "",
-    colour: "",
+    make: prefill?.make ?? "",
+    colour: prefill?.colour ?? "",
     vehicleType: "CAR",
     termsAccepted: false,
   });
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const totalAmount =
-    pricing[formData.class as VehicleClass] *
-    Number(formData.crossings || "1");
+  // Re-sync form fields if prefill arrives after initial render (e.g. hydration)
+  useEffect(() => {
+    if (!prefill) return;
+    setFormData((current) => ({
+      ...current,
+      registrationNumber: prefill.registrationNumber || current.registrationNumber,
+      confirmRegistration: prefill.registrationNumber || current.confirmRegistration,
+      make: prefill.make || current.make,
+      colour: prefill.colour || current.colour,
+    }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [prefill?.registrationNumber, prefill?.make, prefill?.colour]);
+
+  const pricingCode =
+    formData.vehicleType === "BUS"
+      ? "bus"
+      : formData.vehicleType === "HGV"
+        ? "lorry"
+        : "car";
+
+  const totalAmount = pricing[pricingCode] * Number(formData.crossings || "1");
 
   const fieldClassName =
     "mt-2 h-12 w-full rounded-xl border border-slate-300 bg-white px-4 text-base text-slate-950 outline-none transition focus:border-slate-950";
+
+  const readonlyFieldClassName =
+    "mt-2 h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-base text-slate-700 outline-none cursor-default select-none";
 
   function updateField(name: string, value: string | boolean) {
     setFormData((current) => ({
@@ -95,8 +125,50 @@ export function PaymentForm({ pricing }: PaymentFormProps) {
     }
   }
 
+  const hasPrefill =
+    prefill &&
+    (prefill.registrationNumber ||
+      prefill.make ||
+      prefill.colour ||
+      prefill.fuelType ||
+      prefill.yearOfManufacture ||
+      prefill.motStatus ||
+      prefill.taxStatus);
+
   return (
     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+      {/* Vehicle details banner shown when data comes from DVLA check */}
+      {hasPrefill && (
+        <div className="rounded-2xl border border-green-200 bg-green-50 px-4 py-3">
+          <p className="text-sm font-semibold text-green-800">
+            Vehicle details retrieved
+          </p>
+          <div className="mt-2 grid gap-x-6 gap-y-1 text-xs text-green-700 sm:grid-cols-2">
+            {prefill.registrationNumber && (
+              <span>Reg: <strong>{prefill.registrationNumber}</strong></span>
+            )}
+            {prefill.make && (
+              <span>Make: <strong>{prefill.make}</strong></span>
+            )}
+            {prefill.colour && (
+              <span>Colour: <strong>{prefill.colour}</strong></span>
+            )}
+            {prefill.fuelType && (
+              <span>Fuel: <strong>{prefill.fuelType}</strong></span>
+            )}
+            {prefill.yearOfManufacture && (
+              <span>Year: <strong>{prefill.yearOfManufacture}</strong></span>
+            )}
+            {prefill.motStatus && (
+              <span>MOT: <strong>{prefill.motStatus}</strong></span>
+            )}
+            {prefill.taxStatus && (
+              <span>Tax: <strong>{prefill.taxStatus}</strong></span>
+            )}
+          </div>
+        </div>
+      )}
+
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block text-sm font-medium text-slate-800">
           Class
@@ -191,8 +263,9 @@ export function PaymentForm({ pricing }: PaymentFormProps) {
             name="make"
             value={formData.make}
             onChange={(event) => updateField("make", event.target.value)}
-            className={fieldClassName}
+            className={prefill?.make ? readonlyFieldClassName : fieldClassName}
             placeholder="Enter vehicle make"
+            readOnly={Boolean(prefill?.make)}
           />
         </label>
 
@@ -203,11 +276,62 @@ export function PaymentForm({ pricing }: PaymentFormProps) {
             name="colour"
             value={formData.colour}
             onChange={(event) => updateField("colour", event.target.value)}
-            className={fieldClassName}
+            className={prefill?.colour ? readonlyFieldClassName : fieldClassName}
             placeholder="Enter vehicle colour"
+            readOnly={Boolean(prefill?.colour)}
           />
         </label>
       </div>
+
+      {/* Read-only DVLA fields shown only when prefilled */}
+      {(prefill?.fuelType || prefill?.yearOfManufacture || prefill?.motStatus || prefill?.taxStatus) && (
+        <div className="grid gap-4 sm:grid-cols-2">
+          {prefill.fuelType && (
+            <label className="block text-sm font-medium text-slate-800">
+              Fuel type
+              <input
+                type="text"
+                value={prefill.fuelType}
+                readOnly
+                className={readonlyFieldClassName}
+              />
+            </label>
+          )}
+          {prefill.yearOfManufacture && (
+            <label className="block text-sm font-medium text-slate-800">
+              Year of manufacture
+              <input
+                type="text"
+                value={prefill.yearOfManufacture}
+                readOnly
+                className={readonlyFieldClassName}
+              />
+            </label>
+          )}
+          {prefill.motStatus && (
+            <label className="block text-sm font-medium text-slate-800">
+              MOT status
+              <input
+                type="text"
+                value={prefill.motStatus}
+                readOnly
+                className={readonlyFieldClassName}
+              />
+            </label>
+          )}
+          {prefill.taxStatus && (
+            <label className="block text-sm font-medium text-slate-800">
+              Tax status
+              <input
+                type="text"
+                value={prefill.taxStatus}
+                readOnly
+                className={readonlyFieldClassName}
+              />
+            </label>
+          )}
+        </div>
+      )}
 
       <label className="block text-sm font-medium text-slate-800">
         Vehicle type

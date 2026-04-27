@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getHomepageContent } from "@/services";
+import { VehicleCheckForm } from "@/components/vehicle-check-form";
 
 function VisaBadge() {
   return (
@@ -186,41 +187,7 @@ export default async function HomePage() {
               </div>
 
               <div className="mx-auto mt-10 max-w-3xl rounded-[34px] border border-slate-200/80 bg-white/95 p-5 shadow-[0_34px_90px_rgba(15,23,42,0.10)] backdrop-blur sm:mt-12 sm:p-7">
-                <div className="rounded-[28px] border border-slate-200/80 bg-white p-6 sm:p-7 shadow-[0_10px_30px_rgba(15,23,42,0.06)]">
-  <form className="space-y-5">
-    <label className="block text-left">
-      <span className="text-sm font-semibold text-slate-800">
-        Vehicle registration
-      </span>
-
-      <input
-        type="text"
-        placeholder="Enter registration number"
-        className="mt-3 h-14 w-full rounded-2xl border border-slate-300 bg-white px-4 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-slate-900 focus:ring-4 focus:ring-slate-900/5"
-      />
-    </label>
-
-    {/* FIND VEHICLE - LEFT UNDERLINE */}
-    <div className="flex justify-start">
-      <button
-        type="submit"
-        className="text-sm font-medium text-slate-700 underline underline-offset-4 decoration-slate-300 transition hover:text-slate-900"
-      >
-        Find Vehicle
-      </button>
-    </div>
-  </form>
-
-  {/* ENTER VEHICLE MANUALLY - MAIN BUTTON */}
-  <div className="mt-5">
-    <Link
-      href="/payment"
-      className="flex h-14 w-full items-center justify-center rounded-2xl bg-yellow-400 text-base font-semibold text-slate-950 shadow-[0_12px_24px_rgba(250,204,21,0.35)] transition hover:bg-yellow-300 hover:-translate-y-0.5 active:translate-y-0"
-    >
-      Enter Vehicle Manually
-    </Link>
-  </div>
-</div>
+                <VehicleCheckForm />
 
                 <div className="mt-5 rounded-[26px] border border-slate-200/80 bg-white p-5 shadow-[0_10px_30px_rgba(15,23,42,0.04)] sm:mt-6 sm:p-6">
                   <p className="text-sm font-medium text-slate-700">
@@ -324,7 +291,7 @@ export default async function HomePage() {
           >
             <div className="mx-auto grid max-w-4xl gap-4">
               <FaqItem
-                question="When do I need to pay the Dartford Crossing charge?"
+                question="When do I need to pay the Dartford tunnel?"
                 answer="Payment should be made by midnight on the day after you use the crossing. Paying as early as possible helps avoid missed deadlines."
               />
               <FaqItem
@@ -349,7 +316,7 @@ export default async function HomePage() {
                   Ready to begin
                 </p>
                 <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl">
-                  Start your Dartford Crossing payment
+                  Start your Dartford tunnel payment
                 </h2>
                 <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base">
                   Complete your payment with a clean, simple process designed to
@@ -380,7 +347,7 @@ export default async function HomePage() {
           <div className="space-y-1">
             <p className="text-sm font-medium text-slate-800">dartcrossings.co.uk</p>
             <p className="text-xs leading-6 text-slate-500">
-              Online payment for Dartford Crossing charges with a clear and simple
+              Online payment for Dartford tunnel with a clear and simple
               checkout experience.
             </p>
           </div>

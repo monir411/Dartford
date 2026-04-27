@@ -18,6 +18,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
+        suppressHydrationWarning
         style={
           {
             ["--background" as string]: theme.backgroundColor,

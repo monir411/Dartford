@@ -9,7 +9,7 @@ export const createPaymentSchema = z.object({
   email: z.string().email(),
   make: z.string().min(1).max(50),
   colour: z.string().min(1).max(50),
-  vehicleType: z.enum(["CAR", "VAN", "MOTORHOME", "BUS", "HGV"]),
+  vehicleType: z.enum(["CAR", "BUS", "HGV"]),
   termsAccepted: z.literal(true),
 }).superRefine((input, ctx) => {
   if (

@@ -1,38 +1,63 @@
 import { defaultPricingSettings } from "@/config/default-settings";
-import { getPricingItemByCode, getPricingSettings } from "@/server/repositories/settings.repository";
-import type { PricingItem, VehicleClass } from "@/types";
+import {
+  getPricingItemByCode,
+  getPricingSettings,
+} from "@/server/repositories/settings.repository";
+import type { PricingItem, VehiclePricingCode, VehiclePricingValues, VehicleType } from "@/types";
 
 export async function getActivePricing() {
   const items = await getPricingSettings();
   return items.filter((item) => item.isActive);
 }
 
-export async function getPricingForVehicleClass(vehicleClass: VehicleClass) {
-  const pricingCode = vehicleClass.toLowerCase();
+function getDefaultPricingAmount(code: VehiclePricingCode) {
+  return (
+    defaultPricingSettings.find((entry) => entry.code === code)?.amountPence ?? 0
+  );
+}
+
+export function getPricingCodeForVehicleType(
+  vehicleType: VehicleType,
+): VehiclePricingCode {
+  switch (vehicleType) {
+    case "BUS":
+      return "bus";
+    case "HGV":
+      return "lorry";
+    case "CAR":
+    case "VAN":
+    case "MOTORHOME":
+    default:
+      return "car";
+  }
+}
+
+export async function getPricingForVehicleType(vehicleType: VehicleType) {
+  const pricingCode = getPricingCodeForVehicleType(vehicleType);
   const item = await getPricingItemByCode(pricingCode);
 
   if (item?.isActive) {
     return item.amountPence;
   }
 
-  const fallbackItem = defaultPricingSettings.find((entry) => entry.code === pricingCode);
-  return fallbackItem?.amountPence ?? 0;
+  return getDefaultPricingAmount(pricingCode);
 }
 
-export async function getPricingMap() {
+export async function getVehiclePricingMap(): Promise<VehiclePricingValues> {
   const items = await getPricingSettings();
+  const defaults: VehiclePricingValues = {
+    car: getDefaultPricingAmount("car"),
+    lorry: getDefaultPricingAmount("lorry"),
+    bus: getDefaultPricingAmount("bus"),
+  };
 
-  return items.reduce<Record<VehicleClass, number>>(
+  return items.reduce<VehiclePricingValues>(
     (acc, item) => {
-      const key = item.code.toUpperCase() as VehicleClass;
-      acc[key] = item.amountPence;
+      if (item.isActive && (item.code === "car" || item.code === "lorry" || item.code === "bus")) {
+        acc[item.code] = item.amountPence;
+      }
       return acc;
     },
-    {
-      CLASS_A: defaultPricingSettings[0].amountPence,
-      CLASS_B: defaultPricingSettings[1].amountPence,
-      CLASS_C: defaultPricingSettings[2].amountPence,
-      CLASS_D: defaultPricingSettings[3].amountPence,
-    },
+    defaults,
   );
 }

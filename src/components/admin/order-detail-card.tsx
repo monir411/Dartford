@@ -18,6 +18,10 @@ function formatDate(date: Date) {
   }).format(new Date(date));
 }
 
+function formatVehicleType(value: string) {
+  return value === "HGV" ? "Lorry" : value.replace("_", " ");
+}
+
 function DetailRow({
   label,
   value,
@@ -26,9 +30,11 @@ function DetailRow({
   value: string;
 }) {
   return (
-    <div className="flex items-start justify-between gap-4 border-t border-slate-200 py-3 first:border-t-0 first:pt-0">
+    <div className="flex flex-col gap-1 border-t border-slate-200 py-3 first:border-t-0 first:pt-0 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
       <span className="text-sm text-slate-500">{label}</span>
-      <span className="text-right text-sm font-medium text-slate-950">{value}</span>
+      <span className="text-sm font-medium text-slate-950 sm:text-right">
+        {value}
+      </span>
     </div>
   );
 }
@@ -62,7 +68,7 @@ export function OrderDetailCard({ order }: OrderDetailCardProps) {
           <DetailRow label="Vehicle class" value={order.vehicleClass.replace("_", " ")} />
           <DetailRow
             label="Vehicle type"
-            value={order.vehicleType?.replace("_", " ") ?? "Not set"}
+            value={order.vehicleType ? formatVehicleType(order.vehicleType) : "Not set"}
           />
           <DetailRow label="Make" value={order.vehicleMake ?? "Not set"} />
           <DetailRow label="Colour" value={order.vehicleColour ?? "Not set"} />

@@ -15,6 +15,7 @@ import {
   syncAdminUser,
   verifyAdminCredentials,
 } from "@/lib/auth/admin-session";
+import { vehiclePricingFormSchema } from "@/lib/validators/admin";
 import {
   upsertPricingItems,
   upsertSiteSettings,
@@ -44,13 +45,22 @@ export async function logoutAdminAction() {
 export async function updatePricingAction(formData: FormData) {
   await requireAdmin();
 
+  const parsed = vehiclePricingFormSchema.safeParse({
+    car: formData.get("car"),
+    lorry: formData.get("lorry"),
+    bus: formData.get("bus"),
+  });
+
+  if (!parsed.success) {
+    redirect("/admin/pricing?error=Enter valid non-negative prices.");
+  }
+
   await upsertPricingItems(
     defaultPricingSettings.map((item) => ({
       code: item.code,
       label: item.label,
       amountPence: Math.round(
-        Number(formData.get(`${item.code}_amountPence`) ?? item.amountPence / 100) *
-          100,
+        parsed.data[item.code as keyof typeof parsed.data] * 100,
       ),
       isActive: true,
     })),

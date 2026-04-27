@@ -44,15 +44,14 @@ export async function getPricingItemByCode(
 
 export async function getPricingSettings(): Promise<PricingItem[]> {
   const items = await listPricingItems();
-
-  if (items.length > 0) {
-    return items;
-  }
-
-  return defaultPricingSettings.map((item, index) => ({
+  const defaults = defaultPricingSettings.map((item, index) => ({
     id: `default-pricing-${index}`,
     ...item,
   }));
+
+  const itemMap = new Map(items.map((item) => [item.code, item]));
+
+  return defaults.map((item) => itemMap.get(item.code) ?? item);
 }
 
 export async function upsertPricingItems(

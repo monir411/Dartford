@@ -7,6 +7,7 @@ const envSchema = z.object({
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().min(1),
   STRIPE_SECRET_KEY: z.string().min(1),
   ADMIN_SESSION_SECRET: z.string().min(32),
+  VICHECL_CHECK_API: z.string().min(1),
 });
 
 export const env = envSchema.parse({
@@ -17,4 +18,5 @@ export const env = envSchema.parse({
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
   STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
   ADMIN_SESSION_SECRET: process.env.ADMIN_SESSION_SECRET,
+  VICHECL_CHECK_API: process.env.VICHECL_CHECK_API,
 });

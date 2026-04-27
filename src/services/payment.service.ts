@@ -1,5 +1,5 @@
 import { createPaymentSchema } from "@/lib/validators";
-import { getPricingForVehicleClass } from "@/services/pricing.service";
+import { getPricingForVehicleType } from "@/services/pricing.service";
 import {
   createOrderRecord,
   getOrderById,
@@ -9,22 +9,11 @@ import {
   markOrderPaid,
   updateOrderStripeSession,
 } from "@/server";
-import type { CreateOrderInput, VehicleClass } from "@/types";
-
-const basePricing: Record<VehicleClass, number> = {
-  CLASS_A: 250,
-  CLASS_B: 300,
-  CLASS_C: 350,
-  CLASS_D: 600,
-};
-
-export function calculatePaymentAmount(input: CreateOrderInput) {
-  return basePricing[input.class] * input.crossings;
-}
+import type { CreateOrderInput } from "@/types";
 
 export async function createPendingPayment(input: CreateOrderInput) {
   const validatedInput = createPaymentSchema.parse(input);
-  const basePrice = await getPricingForVehicleClass(validatedInput.class);
+  const basePrice = await getPricingForVehicleType(validatedInput.vehicleType);
   const amountPence = basePrice * validatedInput.crossings;
 
   return createOrderRecord({
