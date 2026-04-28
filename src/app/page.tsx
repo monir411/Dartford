@@ -174,7 +174,7 @@ export default async function HomePage() {
             <div className="mx-auto max-w-6xl">
               <div className="mx-auto max-w-3xl text-center">
                 <div className="inline-flex items-center rounded-full border border-slate-200/80 bg-white/85 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500 shadow-[0_10px_30px_rgba(15,23,42,0.05)] backdrop-blur">
-                  Online crossing payment
+                  Online payment
                 </div>
 
                 <h1 className="mt-6 text-[2.5rem] font-semibold tracking-[-0.05em] text-slate-950 sm:text-[3.6rem]">
@@ -345,7 +345,7 @@ export default async function HomePage() {
       <footer className="border-t border-slate-200/80 bg-white px-4 py-8 sm:px-6 sm:py-10">
         <div className="mx-auto flex max-w-6xl flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
-            <p className="text-sm font-medium text-slate-800">ddartcross.co.ukk</p>
+            <p className="text-sm font-medium text-slate-800">dartcross.co.uk</p>
             <p className="text-xs leading-6 text-slate-500">
               Online payment for Dartford tunnel with a clear and simple
               checkout experience.
