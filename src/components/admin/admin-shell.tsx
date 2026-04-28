@@ -18,7 +18,7 @@ export function AdminShell({ children, admin }: AdminShellProps) {
               ADMIN DASHBOARD
             </p>
             <h1 className="truncate text-lg font-semibold text-slate-950">
-              dartcrossings.co.uk
+              dartcross.co.uk
             </h1>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">

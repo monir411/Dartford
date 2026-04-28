@@ -163,7 +163,7 @@ export default async function HomePage() {
                 href="/"
                 className="text-[11px] font-medium tracking-[0.14em] text-slate-500 transition hover:text-slate-700"
               >
-                dartcrossings.co.uk
+                dartcross.co.uk
               </Link>
             </div>
           </div>
@@ -345,7 +345,7 @@ export default async function HomePage() {
       <footer className="border-t border-slate-200/80 bg-white px-4 py-8 sm:px-6 sm:py-10">
         <div className="mx-auto flex max-w-6xl flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
-            <p className="text-sm font-medium text-slate-800">dartcrossings.co.uk</p>
+            <p className="text-sm font-medium text-slate-800">ddartcross.co.ukk</p>
             <p className="text-xs leading-6 text-slate-500">
               Online payment for Dartford tunnel with a clear and simple
               checkout experience.

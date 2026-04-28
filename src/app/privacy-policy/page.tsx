@@ -3,7 +3,7 @@ import { SiteShell } from "@/components/site-shell";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Privacy policy for Dartcrossings.co.uk.",
+  description: "Privacy policy for dartcross.co.uk.",
 };
 
 function PolicyCard({

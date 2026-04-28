@@ -18,7 +18,7 @@ export default async function AdminLoginPage({
           ADMIN LOGIN
         </p>
         <h1 className="mt-3 text-3xl font-semibold text-slate-950">
-          Manage dartcrossings.co.uk
+          Manage dartcross.co.uk
         </h1>
         <p className="mt-3 text-sm leading-6 text-slate-600">
           Sign in to manage pricing, colors, homepage content, sections, and

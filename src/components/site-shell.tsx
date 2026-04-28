@@ -17,18 +17,17 @@ export function SiteShell({
             href="/"
             className="text-[11px] font-medium tracking-[0.12em] text-slate-500 transition hover:text-slate-700"
           >
-            dartcrossings.co.uk
+            dartcross.co.uk
           </Link>
         </div>
       </header>
       <main>{children}</main>
       <footer
-        className={`border-t px-4 py-8 sm:px-6 ${
-          footerTone === "muted" ? "surface-panel" : ""
-        }`}
+        className={`border-t px-4 py-8 sm:px-6 ${footerTone === "muted" ? "surface-panel" : ""
+          }`}
       >
         <div className="mx-auto flex max-w-5xl flex-col gap-3 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
-          <p>dartcrossings.co.uk</p>
+          <p>dartcross.co.uk</p>
           <div className="flex flex-wrap gap-4">
             <Link href="/terms-of-business">Terms</Link>
             <Link href="/privacy-policy">Privacy</Link>
