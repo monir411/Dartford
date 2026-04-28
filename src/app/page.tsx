@@ -227,31 +227,6 @@ export default async function HomePage() {
           </SectionFrame>
 
           <SectionFrame
-            eyebrow="Why choose this"
-            title="Why use this service"
-            description="Built to feel straightforward, reliable, and easy to use across mobile and desktop."
-          >
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              <FeatureCard
-                title="Simple payment process"
-                description="A focused payment flow that keeps the steps clear and removes unnecessary friction."
-              />
-              <FeatureCard
-                title="Mobile-friendly experience"
-                description="Designed for quick use on phones, with large fields, clean spacing, and clear actions."
-              />
-              <FeatureCard
-                title="Clear checkout journey"
-                description="From registration to payment confirmation, the experience stays easy to follow."
-              />
-              <FeatureCard
-                title="Secure payment flow"
-                description="Checkout is handled through a trusted payment process with clear confirmation after payment."
-              />
-            </div>
-          </SectionFrame>
-
-          <SectionFrame
             eyebrow="Confidence"
             title="A clear and trustworthy payment experience"
             description="Everything is designed to help users pay with confidence, without confusion or clutter."
@@ -347,7 +322,7 @@ export default async function HomePage() {
           <div className="space-y-1">
             <p className="text-sm font-medium text-slate-800">dartcross.co.uk</p>
             <p className="text-xs leading-6 text-slate-500">
-              Online payment for Dartford tunnel with a clear and simple
+              Online payment for tunnel with a clear and simple
               checkout experience.
             </p>
           </div>

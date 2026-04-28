@@ -64,7 +64,7 @@ export function PaymentForm({ pricing, prefill }: PaymentFormProps) {
       make: prefill.make || current.make,
       colour: prefill.colour || current.colour,
     }));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prefill?.registrationNumber, prefill?.make, prefill?.colour]);
 
   const pricingCode =
@@ -138,36 +138,7 @@ export function PaymentForm({ pricing, prefill }: PaymentFormProps) {
   return (
     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
       {/* Vehicle details banner shown when data comes from DVLA check */}
-      {hasPrefill && (
-        <div className="rounded-2xl border border-green-200 bg-green-50 px-4 py-3">
-          <p className="text-sm font-semibold text-green-800">
-            Vehicle details retrieved
-          </p>
-          <div className="mt-2 grid gap-x-6 gap-y-1 text-xs text-green-700 sm:grid-cols-2">
-            {prefill.registrationNumber && (
-              <span>Reg: <strong>{prefill.registrationNumber}</strong></span>
-            )}
-            {prefill.make && (
-              <span>Make: <strong>{prefill.make}</strong></span>
-            )}
-            {prefill.colour && (
-              <span>Colour: <strong>{prefill.colour}</strong></span>
-            )}
-            {prefill.fuelType && (
-              <span>Fuel: <strong>{prefill.fuelType}</strong></span>
-            )}
-            {prefill.yearOfManufacture && (
-              <span>Year: <strong>{prefill.yearOfManufacture}</strong></span>
-            )}
-            {prefill.motStatus && (
-              <span>MOT: <strong>{prefill.motStatus}</strong></span>
-            )}
-            {prefill.taxStatus && (
-              <span>Tax: <strong>{prefill.taxStatus}</strong></span>
-            )}
-          </div>
-        </div>
-      )}
+
 
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block text-sm font-medium text-slate-800">
