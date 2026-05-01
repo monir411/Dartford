@@ -163,7 +163,7 @@ export default async function HomePage() {
                 href="/"
                 className="text-[11px] font-medium tracking-[0.14em] text-slate-500 transition hover:text-slate-700"
               >
-                dartcross.co.uk
+                Tunnel Charge
               </Link>
             </div>
           </div>
@@ -266,7 +266,7 @@ export default async function HomePage() {
           >
             <div className="mx-auto grid max-w-4xl gap-4">
               <FaqItem
-                question="When do I need to pay the Dartford tunnel?"
+                question="When do I need to pay the tunnel charge?"
                 answer="Payment should be made by midnight on the day after you use the crossing. Paying as early as possible helps avoid missed deadlines."
               />
               <FaqItem
@@ -291,7 +291,7 @@ export default async function HomePage() {
                   Ready to begin
                 </p>
                 <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-white sm:text-4xl">
-                  Start your Dartford tunnel payment
+                  Start your tunnel charge payment
                 </h2>
                 <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base">
                   Complete your payment with a clean, simple process designed to
@@ -320,9 +320,9 @@ export default async function HomePage() {
       <footer className="border-t border-slate-200/80 bg-white px-4 py-8 sm:px-6 sm:py-10">
         <div className="mx-auto flex max-w-6xl flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
-            <p className="text-sm font-medium text-slate-800">dartcross.co.uk</p>
+            <p className="text-sm font-medium text-slate-800">Tunnel Charge</p>
             <p className="text-xs leading-6 text-slate-500">
-              Online payment for tunnel with a clear and simple
+              Online payment for tunnel charge with a clear and simple
               checkout experience.
             </p>
           </div>

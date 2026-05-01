@@ -1,6 +1,6 @@
 export const siteConfig = {
-  name: "dartcross.co.uk",
+  name: "Tunnel Charge",
   adminBasePath: "/admin",
   apiBasePath: "/api",
-  supportEmail: "support@dartcross.co.uk",
+  supportEmail: "tollcharge@outlook.com",
 } as const;

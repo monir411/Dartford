@@ -3,7 +3,7 @@ import { SiteShell } from "@/components/site-shell";
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: "Contact information for dartcross.co.uk.",
+  description: "Contact information for Tunnel Charge.",
 };
 
 function ContactCard({
@@ -32,7 +32,7 @@ export default function ContactUsPage() {
         <div className="mx-auto max-w-5xl">
           <div className="rounded-[32px] border border-slate-200/80 bg-white p-6 shadow-[0_28px_70px_rgba(15,23,42,0.08)] sm:p-8">
             <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
-              dartcross.co.uk
+              Tunnel Charge
             </p>
             <h1 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-slate-950 sm:text-4xl">
               Contact Us
@@ -82,10 +82,10 @@ export default function ContactUsPage() {
               Need to get in touch and cannot pay through the website? Please
               email{" "}
               <a
-                href="mailto:admin@dartcrossing.co.uk"
+                href="mailto:tollcharge@outlook.com"
                 className="text-slate-900 underline decoration-slate-300 underline-offset-4"
               >
-                admin@dartcrossing.co.uk
+                tollcharge@outlook.com
               </a>
               .
             </p>

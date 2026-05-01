@@ -17,7 +17,7 @@ export function SiteShell({
             href="/"
             className="text-[11px] font-medium tracking-[0.12em] text-slate-500 transition hover:text-slate-700"
           >
-            dartcross.co.uk
+            Tunnel Charge
           </Link>
         </div>
       </header>
@@ -27,7 +27,7 @@ export function SiteShell({
           }`}
       >
         <div className="mx-auto flex max-w-5xl flex-col gap-3 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
-          <p>dartcross.co.uk</p>
+          <p>Tunnel Charge</p>
           <div className="flex flex-wrap gap-4">
             <Link href="/terms-of-business">Terms</Link>
             <Link href="/privacy-policy">Privacy</Link>

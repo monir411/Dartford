@@ -136,7 +136,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
           {isVerified && result && result.ok ? (
             <>
               <p className="mt-3 text-base leading-7 text-slate-600">
-                Your one off Dartford tunnel payment has been confirmed and your
+                Your one off tunnel charge payment has been confirmed and your
                 order has been marked as paid.
               </p>
               <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-5 text-left">

@@ -29,7 +29,7 @@ export async function createStripeCheckoutSession(
           currency: "gbp",
           unit_amount: payload.amountPence,
           product_data: {
-            name: "Dartford Crossing one off payment",
+            name: "Tunnel Charge one off payment",
             description: payload.description,
           },
         },

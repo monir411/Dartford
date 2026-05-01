@@ -15,12 +15,12 @@ export const defaultThemeSettings: ThemeConfig = {
 };
 
 export const defaultHomepageContent: HomepageContent = {
-  homepageTitle: "Dartford crossing charge online",
+  homepageTitle: "Tunnel charge online",
   homepageDescription: "Make payment before midnight the day after use.",
   whoNeedsToPayVisible: true,
   whoNeedsToPayTitle: "Who needs to pay",
   whoNeedsToPayBody:
-    "Most vehicles using the Dartford Crossing need a charge paid for each crossing.\n\nPayment is usually required for cars, vans, motorhomes, and larger commercial vehicles.\n\nExemptions and discounts can apply in some cases, depending on the vehicle or account status.",
+    "Most vehicles using the tunnel crossing need a charge paid for each crossing.\n\nPayment is usually required for cars, vans, motorhomes, and larger commercial vehicles.\n\nExemptions and discounts can apply in some cases, depending on the vehicle or account status.",
   whenToPayVisible: true,
   whenToPayTitle: "When to pay",
   whenToPayBody:

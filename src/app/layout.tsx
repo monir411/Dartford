@@ -4,7 +4,7 @@ import { getCurrentTheme } from "@/services";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Dartford crossing charge online",
+  title: "Tunnel charge online",
   description: "Make payment before midnight the day after use.",
 };
 

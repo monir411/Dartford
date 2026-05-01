@@ -46,7 +46,7 @@ export function PaymentShell({ children }: PaymentShellProps) {
               href="/"
               className="text-[11px] font-medium tracking-[0.14em] text-slate-500 transition hover:text-slate-700"
             >
-              dartcross.co.uk
+              Tunnel Charge
             </Link>
           </div>
         </div>
@@ -58,7 +58,7 @@ export function PaymentShell({ children }: PaymentShellProps) {
       {/* Footer */}
       <footer className="relative z-10 border-t border-blue-200/60 px-4 py-6 sm:px-6">
         <div className="mx-auto flex max-w-5xl flex-col gap-3 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>dartcross.co.uk</p>
+          <p>Tunnel Charge</p>
           <div className="flex flex-wrap gap-4">
             <Link
               href="/terms-of-business"
