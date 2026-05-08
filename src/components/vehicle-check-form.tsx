@@ -78,66 +78,57 @@ export function VehicleCheckForm() {
   }
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit} noValidate>
-      <label className="block text-left">
-        <span className="text-sm font-semibold text-slate-800">
-          Vehicle registration
-        </span>
-
+    <form className="mx-auto max-w-xl" onSubmit={handleSubmit} noValidate>
+      <div className="relative flex flex-col sm:flex-row items-center bg-white/70 backdrop-blur-xl rounded-[20px] sm:rounded-full border border-white p-2 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+        <label htmlFor="hero-reg-input" className="sr-only">Vehicle Registration</label>
         <input
           id="hero-reg-input"
           type="text"
           value={reg}
           onChange={handleChange}
-          placeholder="Enter registration number"
+          placeholder="Vehicle Registration"
           maxLength={8}
           autoComplete="off"
           autoCorrect="off"
           spellCheck={false}
-          className={`mt-3 h-14 w-full rounded-2xl border bg-white px-4 font-mono text-base font-semibold tracking-widest text-slate-900 outline-none transition placeholder:font-sans placeholder:font-normal placeholder:tracking-normal placeholder:text-slate-400 focus:ring-4 ${
+          className={`flex-1 w-full bg-transparent h-12 px-5 text-base sm:text-lg font-medium outline-none placeholder:text-slate-600 ${
             checkState.status === "error"
-              ? "border-red-400 focus:border-red-500 focus:ring-red-500/10"
+              ? "text-red-600"
               : reg && !isValid
-                ? "border-amber-400 focus:border-amber-500 focus:ring-amber-500/10"
-                : "border-slate-300 focus:border-slate-900 focus:ring-slate-900/5"
+                ? "text-amber-600"
+                : "text-slate-900"
           }`}
         />
-      </label>
+        <button
+          id="hero-check-vehicle-btn"
+          type="submit"
+          disabled={!isValid || isLoading}
+          className="mt-2 sm:mt-0 flex w-full sm:w-auto h-12 items-center justify-center gap-2 rounded-xl sm:rounded-full bg-[#0052cc] px-8 text-base font-semibold text-white shadow-sm transition hover:bg-[#0047b3] disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isLoading ? (
+            <>
+              <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-white/20 border-t-white" aria-hidden="true" />
+              Checking…
+            </>
+          ) : (
+            "Check Vehicle"
+          )}
+        </button>
+      </div>
 
       {/* Inline validation hint */}
       {reg && !isValid && checkState.status !== "error" && (
-        <p className="text-xs text-amber-600">
-          This doesn&apos;t look like a valid UK registration. Please check and
-          try again.
+        <p className="mt-3 text-sm text-amber-600 text-center font-medium">
+          This doesn't look like a valid UK registration.
         </p>
       )}
 
       {/* API error */}
       {checkState.status === "error" && (
-        <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="mt-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 text-center">
           {checkState.message}
         </div>
       )}
-
-      <button
-        id="hero-check-vehicle-btn"
-        type="submit"
-        disabled={!isValid || isLoading}
-        className="flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-yellow-400 text-base font-semibold text-slate-950 shadow-[0_12px_24px_rgba(250,204,21,0.35)] transition hover:-translate-y-0.5 hover:bg-yellow-300 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:hover:translate-y-0"
-      >
-        {isLoading ? (
-          <>
-            {/* Simple CSS spinner — no extra deps */}
-            <span
-              className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-slate-950/20 border-t-slate-950"
-              aria-hidden="true"
-            />
-            Checking vehicle…
-          </>
-        ) : (
-          "Check Vehicle"
-        )}
-      </button>
     </form>
   );
 }

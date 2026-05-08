@@ -73,7 +73,7 @@ export function PaymentShell({ children }: PaymentShellProps) {
               Privacy
             </Link>
             <Link
-              href="/contact-us"
+              href="/contact"
               className="transition hover:text-slate-700"
             >
               Help

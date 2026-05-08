@@ -31,7 +31,7 @@ export function SiteShell({
           <div className="flex flex-wrap gap-4">
             <Link href="/terms-of-business">Terms</Link>
             <Link href="/privacy-policy">Privacy</Link>
-            <Link href="/contact-us">Help</Link>
+            <Link href="/contact">Help</Link>
           </div>
         </div>
       </footer>
