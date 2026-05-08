@@ -78,8 +78,8 @@ export function VehicleCheckForm() {
   }
 
   return (
-    <form className="mx-auto max-w-xl" onSubmit={handleSubmit} noValidate>
-      <div className="relative flex flex-col sm:flex-row items-center bg-white/70 backdrop-blur-xl rounded-[20px] sm:rounded-full border border-white p-2 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+    <form className="mx-auto max-w-xl w-[95%] sm:w-full" onSubmit={handleSubmit} noValidate>
+      <div className="relative flex flex-row items-center bg-white/70 backdrop-blur-xl rounded-full border border-white p-1.5 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
         <label htmlFor="hero-reg-input" className="sr-only">Vehicle Registration</label>
         <input
           id="hero-reg-input"
@@ -91,7 +91,7 @@ export function VehicleCheckForm() {
           autoComplete="off"
           autoCorrect="off"
           spellCheck={false}
-          className={`flex-1 w-full bg-transparent h-12 px-5 text-base sm:text-lg font-medium outline-none placeholder:text-slate-600 ${
+          className={`flex-1 w-full bg-transparent h-12 sm:h-14 px-4 sm:px-6 text-sm sm:text-lg font-medium outline-none placeholder:text-slate-600 ${
             checkState.status === "error"
               ? "text-red-600"
               : reg && !isValid
@@ -103,7 +103,7 @@ export function VehicleCheckForm() {
           id="hero-check-vehicle-btn"
           type="submit"
           disabled={!isValid || isLoading}
-          className="mt-2 sm:mt-0 flex w-full sm:w-auto h-12 items-center justify-center gap-2 rounded-xl sm:rounded-full bg-[#0052cc] px-8 text-base font-semibold text-white shadow-sm transition hover:bg-[#0047b3] disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex h-12 sm:h-14 items-center justify-center gap-2 rounded-full bg-[#0052cc] px-5 sm:px-8 text-sm sm:text-base font-semibold text-white shadow-sm transition hover:bg-[#0047b3] disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
         >
           {isLoading ? (
             <>

@@ -19,7 +19,7 @@ export default async function HomePage() {
     <div className="min-h-screen bg-white font-sans text-slate-900">
       {/* Hero Wrapper with exact CSS */}
       <div
-        className="relative w-full overflow-hidden pt-[90px] pb-[120px] min-h-[620px] flex flex-col after:content-[''] after:absolute after:-bottom-4 after:left-1/2 after:-translate-x-1/2 after:w-[150%] sm:after:w-[120%] after:h-[120px] after:bg-white after:rounded-t-[50%]"
+        className="relative w-full overflow-hidden pt-[40px] sm:pt-[90px] pb-[40px] sm:pb-[120px] min-h-[auto] sm:min-h-[620px] flex flex-col after:content-[''] after:absolute after:-bottom-2 sm:after:-bottom-4 after:left-1/2 after:-translate-x-1/2 after:w-[150%] sm:after:w-[120%] after:h-[60px] sm:after:h-[120px] after:bg-white after:rounded-t-[50%]"
         style={{
           background: `
             radial-gradient(circle at 20% 20%, rgba(87, 156, 255, 0.28), transparent 35%),
@@ -28,8 +28,8 @@ export default async function HomePage() {
           `
         }}
       >
-        <header className="absolute top-0 inset-x-0 px-4 pt-5 sm:px-6 z-10">
-          <div className="mx-auto max-w-5xl flex items-center justify-between pb-4">
+        <header className="relative sm:absolute top-0 inset-x-0 px-4 pt-3 sm:pt-5 sm:px-6 z-20">
+          <div className="mx-auto max-w-5xl flex flex-col sm:flex-row items-center justify-between pb-3 sm:pb-4 gap-3 sm:gap-0">
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-2 text-[#0052cc] font-bold text-xl tracking-tight">
                 <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,7 +38,7 @@ export default async function HomePage() {
                 CrossPay Online
               </div>
             </div>
-            <nav className="flex items-center gap-3 sm:gap-6 text-sm font-semibold text-slate-800">
+            <nav className="flex items-center gap-3 sm:gap-6 text-xs sm:text-sm font-semibold text-slate-800 bg-white/60 sm:bg-transparent px-4 py-1.5 sm:px-0 sm:py-0 rounded-full backdrop-blur-sm sm:backdrop-blur-none">
               <Link href="/">Home</Link>
               <span className="text-slate-300">|</span>
               <Link href="/payment">Pay Now</Link>
@@ -48,18 +48,18 @@ export default async function HomePage() {
           </div>
         </header>
 
-        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 w-full flex-1">
+        <div className="relative z-10 mx-auto max-w-[95%] sm:max-w-4xl px-2 sm:px-6 w-full flex-1 mt-6 sm:mt-0">
           <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-[2.2rem] font-bold leading-tight tracking-tight text-slate-950 sm:text-[3.5rem]">
+            <h1 className="text-[42px] leading-[1.1] sm:text-[3.5rem] sm:leading-tight font-bold tracking-tight text-slate-950">
               Vehicle Crossing<br />Charge Online
             </h1>
 
-            <p className="mx-auto mt-4 max-w-xl text-base text-slate-700 sm:text-lg font-medium">
+            <p className="mx-auto mt-2 sm:mt-4 max-w-xl text-sm sm:text-lg font-medium text-slate-700">
               Make payment before midnight the day after crossing.
             </p>
           </div>
 
-          <div className="mx-auto mt-8 max-w-2xl">
+          <div className="mx-auto mt-6 sm:mt-8 max-w-2xl">
             <VehicleCheckForm />
           </div>
         </div>
@@ -67,9 +67,9 @@ export default async function HomePage() {
 
       <main>
 
-        <section className="px-4 py-8 sm:px-6 sm:py-12">
+        <section className="px-4 pb-8 pt-8 sm:px-6 sm:pb-12 sm:pt-16">
           <div className="mx-auto max-w-5xl text-center">
-            <h2 className="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+            <h2 className="text-2xl sm:text-4xl font-semibold tracking-tight text-slate-950">
               How it works
             </h2>
 
